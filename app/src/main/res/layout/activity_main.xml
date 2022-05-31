@@ -34,34 +34,36 @@
         android:id="@+id/btnMenDif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="btnMenDif"
         android:text="Enviar mensaje y difusion"></Button>
 
     <Button
         android:id="@+id/btnProMensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="btnProMensaje"
         android:text="Programar Mensaje" />
 
     <TextView
-        android:id="@+id/txtProMensaje"
+        android:id="@+id/lblProMensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mnesaje Programado:" />
 
     <TextView
-        android:id="@+id/txtMensaje"
+        android:id="@+id/lblMensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/txtNumeroGuardado"
+        android:id="@+id/lblNumeroGuardado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Numero:" />
 
     <TextView
-        android:id="@+id/txtNumero"
+        android:id="@+id/lblNumero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />

@@ -11,40 +11,27 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public class MiBroadcastReceiverB
-        extends BroadcastReceiver {
-    private TelephonyManager mTelephonyManager;
-    public static boolean isListening = false;
-    public String outgoingPhoneNo;
+import net.ivanvega.mireceiverb.R;
 
+public class MiBroadcastReceiverB extends BroadcastReceiver {
+    private static final String TAG = "MyBroadcastReceiver";
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        mTelephonyManager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
+        if (Intent.ACTION_INPUT_METHOD_CHANGED.equals(intent.getAction())){
+            Toast.makeText(context, "CAMBIO DE METODO DE ENTRADA", Toast.LENGTH_LONG).show();
+        }else if(intent.getAction().equals(context.getString(R.string.action_broadcast))){
 
-        PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
-            @Override
-            public void onCallStateChanged(int state, String incomingNumber) {
-                super.onCallStateChanged(state, incomingNumber);
+            Toast.makeText(context, "CACHANDO MIS PROPIAS DIFUCIONES: " +
+                    intent.getStringExtra("key1"), Toast.LENGTH_LONG).show();
 
-                switch (state) {
-                    case TelephonyManager.CALL_STATE_IDLE:
-                        Toast.makeText(context, "CALL_STATE_IDLE", Toast.LENGTH_SHORT).show();
-                        break;
-                    case TelephonyManager.CALL_STATE_RINGING:
-                        Toast.makeText(context, "CALL_STATE_RINGING", Toast.LENGTH_SHORT).show();
-                        break;
-                    case TelephonyManager.CALL_STATE_OFFHOOK:
-                        Toast.makeText(context, "CALL_STATE_OFFHOOK", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        };
-
-        if (!isListening) {
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-            isListening = true;
         }
-        outgoingPhoneNo = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER).toString();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Action: " + intent.getAction() + "\n");
+        sb.append("URI: " + intent.toUri(Intent.URI_INTENT_SCHEME).toString() + "\n");
+        String log = sb.toString();
+        Log.d(TAG, log);
+        Toast.makeText(context, log, Toast.LENGTH_LONG).show();
     }
 }

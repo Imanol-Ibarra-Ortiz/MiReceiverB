@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.ivanvega.mireceiverb">
 
-    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
-    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 
     <application
@@ -24,19 +24,27 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:exported="true"
-            android:name=".receiver.MiBroadcastReceiverB"
-            android:permission="android.permission.BROADCAST_SMS"
-            >
-
+        <receiver android:name=".receiver.MiBroadcastReceiverB"  android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-                <action android:name="android.intent.action.INPUT_METHOD_CHANGED"></action>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="net.ivanvega.mibroadcastreceiverytelefonia.MIBROACAST"/>
             </intent-filter>
+        </receiver>
+
+
+        <receiver android:name=".receiver.MiReceiverTelefonia">
 
         </receiver>
+
+        <receiver android:name=".receiver.MyReceiverCalls"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
